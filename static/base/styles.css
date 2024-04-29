@@ -1,0 +1,367 @@
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 16px 18px;
+  overflow: hidden;
+  background-color: #333;
+  text-align: center;
+}
+.navbar li {
+  float: left;
+}
+
+/* logo made at https://express.adobe.com/express-apps/logomaker/preview */
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  width: 100px;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-bottom: 1px solid transparent
+}
+
+.navbar li a:hover {
+  border-color: white;
+  transition-duration: 0.5s;
+}
+
+.navbar img {
+  display: inline-block;
+  position: sticky;
+  max-height: 50px;
+  width: auto;
+  overflow: hidden;
+  top: 50%;
+  padding: -6px;
+  margin: -6px;
+  border-radius: 50%;
+}
+.navbarlogin {
+  position: absolute;
+  right: 16px;
+}
+
+.summary {
+  margin-right: 50%;
+}
+.review{
+  margin-right: 50%;
+  overflow: auto;
+  overflow-wrap: break-word;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+}
+.reviewp {
+  font-size: 20px;
+  margin-right: 0%;
+}
+.reviewwrapper{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.reviewuser {
+  font-size: 20px;
+  padding-right: 15px;
+  float: left;
+  display:inline-block;
+}
+.reviewprofilepic {
+  display: inline-block;
+  width:50px;
+  height:50px;
+  top: 50%;
+  position: relative;
+}
+.profilewrapper{
+  margin-left: 25%;
+  margin-right: 25%;
+  background-color: rgba(0, 0, 0, 66%);
+}
+/* Button tutorial found at https://www.w3schools.com/css/css3_buttons.asp */
+
+.buttonadd {
+  background-color: green;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttonadd:hover {
+  background-color: white;
+  border: green 2px solid;
+  color: green;
+}
+.buttonedit {
+  background-color: orange;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttonedit:hover {
+  background-color: white;
+  border: orange 2px solid;
+  color: orange;
+}
+.buttondelete {
+  background-color: red;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttondelete:hover {
+  background-color: white;
+  border: red 2px solid;
+  color: red;
+}
+.buttondeletesml {
+  background-color: red;
+  border: black 2px solid;
+  color: white;
+  padding: 9px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttondeletesml:hover {
+  background-color: white;
+  border: red 2px solid;
+  color: red;
+}
+.panel-heading {
+  font-family: 'Enriqueta',
+  arial,
+  serif;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.panel-body {
+  font-family: sans-serif;
+  line-height: 1.25;
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+p {
+  color: #FFFFFF;
+  font-family: "Helvetica Neue",
+  Arial,
+  sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5625;
+  margin-bottom: 15px;
+}
+/*
+Image was a free stock photo from the website:
+https://unsplash.com/photos/evlkOfkQ5rE
+ */
+body {
+  background-image: url("backgroundimage/theater.jpg");
+  background-repeat: repeat;
+  background-size: 100% auto;
+  background-color: black;
+  font-family: sans-serif;
+  margin-left:10px;
+  margin-right: 10px;
+}
+.resize {
+  width: 400px;
+  height: auto;
+}
+/*
+CSS table styling was used from a tutorial from the website:
+ https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l
+ this was used with slight modification.
+ */
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: darkslategray;
+    color: orange;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: thin solid rgba(221, 221, 221, 0.59);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: rgba(243, 243, 243, 0.88);
+}
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: rgba(243, 243, 243, 0.92);
+}
+.styled-table tbody tr:last-of-type {
+    border-bottom: thin solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+h1{
+  color: #FFFFFF;
+}
+h2{
+  color: #FFFFFF;
+}
+a {
+  color: orange;
+}
+h3{
+  color: #FFFFFF;
+}
+h4{
+  color: #FFFFFF;
+}
+.div-1{
+  background-color: white;
+}
+.review-form{
+  color:white;
+}
+.buttonfavorite {
+  background-color: sandybrown;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttonfavorite:hover {
+  background-color: white;
+  border: sandybrown 2px solid;
+  color: sandybrown;
+}
+
+.home div {
+  align-content: center;
+}
+.profileactions {
+  position: relative;
+  float: right;
+  width: 20%;
+  padding-top: 50px;
+  margin: 0 auto;
+}
+.casbah {
+  padding: 25px;
+  margin-right: 50%;
+}
+.casbah h1 {
+  border-bottom: 1px solid white;
+  position: relative;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.profileimage {
+  width: 200px;
+  justify-content: center;
+  align-content: center;
+}
+.profilereviews {
+  border-bottom: 1px solid rgba(255, 255, 255, 55%);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: auto;
+  overflow-wrap: break-word;
+}
+
+.list-container {
+  padding-top: 15px;
+  margin: auto;
+  width: 60%;
+  display: flex;
+}
+.list-wrapper {
+  margin: auto;
+  right: 50%
+}
+.moviedetailwrapper {
+  padding: 25px;
+}
+
+.formwrapper {
+  margin-left: 25%;
+  margin-right: 25%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 66%);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  align-content: center;
+  text-align: center;
+}
+.formcontent {
+  padding-top: 20px;
+  color: white;
+}
+.headerwrapper{
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-family: sans-serif;
+}
+
+
+.img-container {
+  box-sizing: border-box;
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+.clearfix::after {
+  box-sizing: border-box;
+  content: "";
+  clear: both;
+  display: table;
+}
+.SearchBar {
+     top: 355px;
+     left: 575px;
+}
+
+.SearchBar input {
+     height: 30px;
+     width: 90px;
+}

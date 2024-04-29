@@ -9,6 +9,12 @@ class Rank(models.Model):
     rank_title = models.CharField(max_length=30)
 
 
+class EloInfo(models.Model):
+    player = models.OneToOneField(User, on_delete=models.CASCADE)
+    elo = models.IntegerField()
+    online_status = models.BooleanField()
+
+
 # class User(AbstractUser):
 #     elo = models.IntegerField(default=1000, validators=[
 #             MaxValueValidator(2000),

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="script" href="{% static "base/script.js" %}">
+<script src="{% static "base/script.js" %}"></script>
+<link rel="stylesheet" href="{% static "base/styles.css" %}">
+
+    <head>
+        <title>Spielcraft Matchmaking</title>
+    </head>
+    <!-- Dark background with white text -->
+    <div class="navbar">
+        <!--Display navigation options left-justified in navbar -->
+        <ul>
+            <li>
+                <a href="{% url 'matchmaking:home' %}">Home</a>
+            </li>
+            <li>
+                <a href="{% url 'matchmaking:home' %}">Find Match</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li><form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button class="navbarlogin" type="submit">Log out</button>
+</form>
+                </li>
+            {% else %}
+                <li><a class="navbarlogin" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<body id="app-layout">
+<div class="row">
+    <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
+
