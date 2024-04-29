@@ -11,7 +11,7 @@ def home(request):
 
 
 def findmatch(request):
-    return render(request, 'findmatch.html', {'matchmaking': findmatch})
+    return render(request, 'findmatch.html', {'findmatch': findmatch})
 
 
 def logout_view(request):
