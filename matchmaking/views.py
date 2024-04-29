@@ -10,5 +10,9 @@ def home(request):
                   {'matchmaking': home})
 
 
+def findmatch(request):
+    return render(request, 'findmatch.html', {'matchmaking': findmatch})
+
+
 def logout_view(request):
     logout(request)

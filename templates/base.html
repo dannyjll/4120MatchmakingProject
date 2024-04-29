@@ -18,12 +18,12 @@
                 <a href="{% url 'matchmaking:home' %}">Home</a>
             </li>
             <li>
-                <a href="{% url 'matchmaking:home' %}">Find Match</a>
+                <a href="{% url 'matchmaking:findmatch' %}">Find Match</a>
             </li>
             {% if user.is_authenticated %}
-                <li><form method="post" action="{% url 'logout' %}">
+                <li><form method="post" id="logout" action="{% url 'logout' %}">
     {% csrf_token %}
-    <button class="navbarlogin" type="submit">Log out</button>
+    <a class="navbarlogin" onclick="document.getElementById('logout').submit()">Log out</a>
 </form>
                 </li>
             {% else %}

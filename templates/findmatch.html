@@ -4,15 +4,15 @@
 {% load static %}
 {% block content %}
     <body>
+    <script src="{% static 'base/matchmaking.js' %}"></script>
     {% if user.is_authenticated %}
         <div class="home">
         <h2 class="top-menu">Hello {{ user.username }},</h2>
-        <h1>Welcome to Spielcraft Matchmaking</h1>
+        <h1>Click below to find a match:</h1>
+            <div>
+            <button id="queue-btn">Enter queue</button>
         </div>
-    {% else %}
-        <div class="home">
-        <h2 class="top-menu">Please log in to continue to this website.</h2>
-        </div>
+            </div>
     {% endif %}
     </body>
 {% endblock %}

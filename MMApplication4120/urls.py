@@ -27,3 +27,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('matchmaking.urls')),
 ]
+
+
