@@ -1,6 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
-from .models import EloInfo, Rank
+from .models import EloInfo, Rank, Match, Result
 from django.contrib.auth.models import User
 from asgiref.sync import async_to_sync, sync_to_async
 
@@ -8,6 +8,14 @@ from asgiref.sync import async_to_sync, sync_to_async
 class MatchmakingConsumer(AsyncWebsocketConsumer):
 
     waiting_users = []
+    matches = []
+
+    @sync_to_async
+    def get_username(self, user):
+        # Retrieve the username associated with the user's WebSocket connection
+        user_id = user.scope['user'].id
+        user_obj = User.objects.get(id=user_id)
+        return user_obj.username
 
     async def connect(self):
         await self.accept()
@@ -23,6 +31,10 @@ class MatchmakingConsumer(AsyncWebsocketConsumer):
 
         if action == 'queue_for_match':
             await self.queue_for_match()
+        elif action == 'accept_match':
+            await self.accept_match()
+        elif action == 'deny_match':
+            await self.deny_match()
 
     async def queue_for_match(self):
         print('A user has queued for a match')
@@ -30,13 +42,6 @@ class MatchmakingConsumer(AsyncWebsocketConsumer):
         if len(self.waiting_users) >= 2:
             await self.match_users()
         pass
-
-    @sync_to_async
-    def get_username(self, user):
-        # Retrieve the username associated with the user's WebSocket connection
-        user_id = user.scope['user'].id
-        user_obj = User.objects.get(id=user_id)
-        return user_obj.username
 
     async def match_users(self):
         print('Matching users...')
@@ -52,6 +57,34 @@ class MatchmakingConsumer(AsyncWebsocketConsumer):
         # For simplicity, let's assume their usernames are 'User1' and 'User2'
         await user1.send(text_data=json.dumps({'opponent_username': user2_username}))
         await user2.send(text_data=json.dumps({'opponent_username': user1_username}))
+        match = ({user1: 'pending'}, {user2: 'pending'})
+        self.matches.append(match)
+
+    async def prompt_users_for_match(self):
+        for user in self.waiting_users:
+            await user.send(text_data=json.dumps({'message': 'Do you accept the match?'}))
+            self.waiting_user_actions[user] = 'pending'
+
+    async def accept_match(self):
+        pass
+
+    async def deny_match(self):
+        pass
+
+    async def check_match_confirmation(self):
+        if len(self.waiting_user_actions) < 2:
+            pass
+        else:
+            if all(action == 'accept' for action in self.waiting_user_actions.values()):
+                await self.start_match()
+            elif any(action == 'deny' for action in self.waiting_user_actions.values()):
+                await self.cancel_match()
+
+    async def start_match(self):
+        print('Both users have accepted the match. Starting match...')
+
+    async def cancel_match(self):
+        print('One or both users have denied the match. Cancelling match...')
 
     async def match_update(self, event):
         pass

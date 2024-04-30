@@ -32,6 +32,7 @@ class EloInfo(models.Model):
 
 class Match(models.Model):
     match_date = models.DateTimeField(default=timezone.now)
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return self.pk + ": Match PK"

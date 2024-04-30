@@ -18,16 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (data.opponent_username) {
             matchStatus.innerHTML += '<br>Your opponent is: ' + data.opponent_username;
-            var acceptbutton = document.createElement("button");
-            acceptbutton.id = "accept-btn";
-            acceptbutton.textContent = "Accept";
-            var denybutton = document.createElement("button");
-            denybutton.id = "deny-btn";
-            denybutton.textContent = "Deny";
-            var container = document.getElementById("acceptdeny");
-            container.appendChild(acceptbutton);
-            container.appendChild(denybutton);
-            queueBtn.remove()
+            var denybutton = document.getElementById("deny-btn");
+            var acceptbutton = document.getElementById("accept-btn");
+            acceptbutton.disabled = false
+            denybutton.disabled = false
             document.getElementById('searching').innerHTML = "Match found!"
         }
     };
@@ -38,17 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
         'action': 'queue_for_match'});
         console.log('Message:', message)
         socket.send(message)
+        queueBtn.remove()
     }
     acceptBtn.onclick = function() {
         const message = JSON.stringify({
-        'action': ''});
+        'action': 'accept_match'});
         console.log('Message:', message)
         socket.send(message)
     }
-    queueBtn.onclick = function() {
-        document.getElementById('searching').innerHTML = "You are now searching for a match!"
+    denyBtn.onclick = function() {
         const message = JSON.stringify({
-        'action': 'queue_for_match'});
+        'action': 'deny_match'});
         console.log('Message:', message)
         socket.send(message)
     }
