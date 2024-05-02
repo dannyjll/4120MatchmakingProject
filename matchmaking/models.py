@@ -14,7 +14,7 @@ class Rank(models.Model):
 
 class EloInfo(models.Model):
     player = models.OneToOneField(User, null=True, on_delete=models.CASCADE, unique=True)
-    elo = models.IntegerField()
+    elo = models.IntegerField(default=1000, validators=[MaxValueValidator(2000),MinValueValidator(0)])
     online_status = models.BooleanField()
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Match(models.Model):
     users = models.ManyToManyField(User)
 
     def __str__(self):
-        return self.pk + ": Match PK"
+        return str(self.pk) + ": Match PK"
 
 
 class Result(models.Model):
@@ -44,4 +44,4 @@ class Result(models.Model):
     match_result = models.BooleanField()
 
     def __str__(self):
-        return self.user_id + "\'s Match Result"
+        return str(self.user_id) + "\'s Match " + str(self.match_id) + "Result"

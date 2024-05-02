@@ -24,6 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
             denybutton.disabled = false
             document.getElementById('searching').innerHTML = "Match found!"
         }
+        if (data.opponent_rating) {
+            matchStatus.innerHTML += '<br>Your opponents Elo rating is: ' + data.opponent_rating;
+        };
+        if (data.acceptdeny) {
+            matchStatus.innerHTML += '<br>You have ' + data.acceptdeny + ' the match!';
+        }
+        if (data.startingcancelled) {
+            matchStatus.innerHTML += '<br>Your match is ' + data.startingcancelled;
+            if (data.startingcancelled === 'cancelled.') {
+                acceptBtn.remove()
+                denyBtn.remove()
+                matchStatus.remove()
+                socket.close()
+                queueBtn.disabled = false
+                location.replace(location.href)
+            }
+        }
+        if (data.result) {
+            matchStatus.innerHTML += '<br>' + data.result;
+        };
+        if (data.updated_rating) {
+            matchStatus.innerHTML += '<br> Your new Elo rating is: ' + data.updated_rating;
+        };
     };
 
     queueBtn.onclick = function() {
@@ -32,18 +55,22 @@ document.addEventListener('DOMContentLoaded', function() {
         'action': 'queue_for_match'});
         console.log('Message:', message)
         socket.send(message)
-        queueBtn.remove()
+        queueBtn.disabled = true
     }
     acceptBtn.onclick = function() {
         const message = JSON.stringify({
         'action': 'accept_match'});
         console.log('Message:', message)
         socket.send(message)
+        acceptBtn.remove()
+        denyBtn.remove()
     }
     denyBtn.onclick = function() {
         const message = JSON.stringify({
         'action': 'deny_match'});
         console.log('Message:', message)
         socket.send(message)
+        acceptBtn.remove()
+        denyBtn.remove()
     }
 });
