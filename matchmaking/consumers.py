@@ -2,18 +2,16 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from .models import EloInfo, Rank, Match, Result
 from django.contrib.auth.models import User
-from asgiref.sync import async_to_sync, sync_to_async
+from asgiref.sync import sync_to_async
 import random
-
+from collections import deque  # Import deque
 
 class MatchmakingConsumer(AsyncWebsocketConsumer):
-
-    # Usered queued
-    waiting_users = []
-    # Matches made within the queue system
+    # Use deque for efficient pop and append operations
+    waiting_users = deque()
     matchesmade = []
-    # Matches that are on going
     ongoingmatches = []
+    elo_range = 200
 
     # Updates the elo record for both players. Validates that they do not go exceed the specified minimums or maximums.
     @sync_to_async
@@ -49,7 +47,6 @@ class MatchmakingConsumer(AsyncWebsocketConsumer):
         user_obj = User.objects.get(id=user_id)
         new_result = Result.objects.create(match_id=match_obj, user_id=user_obj, match_result=result)
         new_result.save()
-
 
 
     # Retrieve the username associated with the user's WebSocket connection
@@ -96,30 +93,53 @@ class MatchmakingConsumer(AsyncWebsocketConsumer):
             await self.match_users()
         pass
 
-    # Matches two users together using an algorithm, and sends messages to the users
-    async def match_users(self):
-        # print('Matching users...')
-        # Pop the first two users from the waiting list
-        user1 = self.waiting_users.pop(0)
-        user2 = self.waiting_users.pop(0)
-        # Notify the users that they have been matched
-        await user1.send(text_data=json.dumps({'message': 'You have been matched with another player!'}))
-        await user2.send(text_data=json.dumps({'message': 'You have been matched with another player!'}))
-        # Retrieves the username from the database
+    async def notify_users_of_match(self, user1, user2, user1_elo, user2_elo):
         user1_username = await self.get_username(user1)
         user2_username = await self.get_username(user2)
-        # Retrieves the elo info from the database
-        user1_elo = await self.get_eloinfo(user1)
-        user2_elo = await self.get_eloinfo(user2)
-        # Sends the username to the users, so they know who they are playing against
-        await user1.send(text_data=json.dumps({'opponent_username': user2_username}))
-        await user2.send(text_data=json.dumps({'opponent_username': user1_username}))
-        # Sends the elo info, so they know the rating of the player they are against
-        await user1.send(text_data=json.dumps({'opponent_rating': str(user2_elo)}))
-        await user2.send(text_data=json.dumps({'opponent_rating': str(user1_elo)}))
-        # Creates a match between two users as a tuple and appends it to a list.
-        match = {user1: 'pending', user2: 'pending'}
-        self.matchesmade.append(match)
+
+        # Send notification to user1
+        await user1.send(text_data=json.dumps({
+            'message': 'You have been matched with another player!',
+            'opponent_username': user2_username,
+            'opponent_rating': user2_elo
+        }))
+
+        # Send notification to user2
+        await user2.send(text_data=json.dumps({
+            'message': 'You have been matched with another player!',
+            'opponent_username': user1_username,
+            'opponent_rating': user1_elo
+        }))
+
+    # Matches two users together using an algorithm, and sends messages to the users
+    async def match_users(self):
+        temporary_queue = deque()
+
+        while self.waiting_users:
+            user1 = self.waiting_users.popleft()
+            user1_elo = await self.get_eloinfo(user1)
+
+            match_found = False
+            # Attempt to find a match in the remaining queue
+            for i in range(len(self.waiting_users)):
+                user2 = self.waiting_users[i]
+                user2_elo = await self.get_eloinfo(user2)
+
+                if abs(user1_elo - user2_elo) <= self.elo_range:
+                    # If a match is found, notify users and create the match
+                    await self.notify_users_of_match(user1, user2, user1_elo, user2_elo)
+                    self.matchesmade.append({user1: 'pending', user2: 'pending'})
+                    self.waiting_users.remove(user2)  # Remove the matched user from the queue
+                    match_found = True
+                    break
+
+            if not match_found:
+                # If no match found, move user1 to a temporary queue to retry after looping
+                temporary_queue.append(user1)
+
+        # Move unmatched users back to the main queue for the next round of matching
+        self.waiting_users.extend(temporary_queue)
+
 
     # Allows users to accept a match and updates their status in the matchesmade list defined above.
     # Checks the match confirmation status after that.
