@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'matchmaking.apps.MatchmakingConfig',
-    'channels'
+    'channels',
 ]
 
 MIDDLEWARE = [

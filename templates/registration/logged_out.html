@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<style>
+
+     p {
+      color: black; /* Set text color to black */
+    }
+
+      a {
+      color: black; /* Set text color to black */
+    }
+
+</style>
+
   <p>Logged out!</p>
   <a href="{% url 'login'%}">Click here to login again.</a>
 {% endblock %}
