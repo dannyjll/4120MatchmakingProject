@@ -16,6 +16,7 @@ urlpatterns = [
     path('findmatch', views.findmatch, name='findmatch'),
     re_path(r'^home/$', views.home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('displayranks', views.display_ranks, name='displayranks'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),

@@ -39,6 +39,9 @@
             <li>
                 <a href="{% url 'matchmaking:findmatch' %}">Find Match</a>
             </li>
+            <li>
+                <a href="{% url 'matchmaking:displayranks' %}">Ranks</a>
+            </li>
             {% if user.is_authenticated %}
                 <li><form method="post" id="logout" action="{% url 'logout' %}">
     {% csrf_token %}

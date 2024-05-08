@@ -13,6 +13,8 @@ def home(request):
 def findmatch(request):
     return render(request, 'findmatch.html', {'findmatch': findmatch})
 
+def display_ranks(request):
+    return render(request, 'displayranks.html', {'display_ranks': display_ranks})
 
 def logout_view(request):
     logout(request)
