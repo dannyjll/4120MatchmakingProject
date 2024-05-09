@@ -5,3 +5,4 @@ __pycache__
 local_settings.py
 .idea
 project/movie/static/images/profile
+matchmaking/migrations/*
