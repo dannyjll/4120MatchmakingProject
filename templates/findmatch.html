@@ -43,6 +43,10 @@
             <button id="accept-btn" disabled>Accept</button>
             <button id="deny-btn" disabled>Deny</button>
         </div>
+    {% else %}
+        <div class="home">
+        <h2 class="top-menu">Please log in to continue to this website.</h2>
+        </div>
     {% endif %}
     </body>
 {% endblock %}
