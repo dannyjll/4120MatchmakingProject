@@ -14,6 +14,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('home', views.home, name='home'),
     path('findmatch', views.findmatch, name='findmatch'),
+    path('usersgraph', views.usersgraph, name='usersgraph'),
     re_path(r'^home/$', views.home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('displayranks', views.display_ranks, name='displayranks'),
