@@ -17,6 +17,44 @@ class EloInfo(models.Model):
     elo = models.IntegerField(default=1000, validators=[MaxValueValidator(2000),MinValueValidator(0)])
     online_status = models.BooleanField()
 
+    ROOKIE = 'Rookie'
+    CHALLENGER = 'Challenger'
+    SEASONED_PLAYER = 'Seasoned Player'
+    VETERAN = 'Veteran'
+    MASTER = 'Master'
+
+    RANK_CHOICES = [
+        (ROOKIE, 'Rookie'),
+        (CHALLENGER, 'Challenger'),
+        (SEASONED_PLAYER, 'Seasoned Player'),
+        (VETERAN, 'Veteran'),
+        (MASTER, 'Master'),
+    ]
+
+    rank_tier = models.CharField(max_length=20, choices=RANK_CHOICES, default=SEASONED_PLAYER)
+
+    def calculate_rank_tier(self):
+        """
+        Calculate the rank tier based on Elo rating.
+        """
+        if self.elo <= 400:
+            return self.ROOKIE
+        elif self.elo <= 800:
+            return self.CHALLENGER
+        elif self.elo <= 1200:
+            return self.SEASONED_PLAYER
+        elif self.elo <= 1600:
+            return self.VETERAN
+        else:
+            return self.MASTER
+
+    def save(self, *args, **kwargs):
+        """
+        Override the save method to update rank tier when saving player object.
+        """
+        self.rank_tier = self.calculate_rank_tier()
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.player.username + "\'s Elo Info"
 
