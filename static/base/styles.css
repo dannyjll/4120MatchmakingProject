@@ -132,6 +132,23 @@
   border: red 2px solid;
   color: red;
 }
+.buttonaddsml {
+  background-color: green;
+  border: black 2px solid;
+  color: white;
+  padding: 9px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+.buttonaddsml:hover {
+  background-color: white;
+  border: green 2px solid;
+  color: green;
+}
 .buttondeletesml {
   background-color: red;
   border: black 2px solid;
@@ -364,4 +381,90 @@ h4{
 .SearchBar input {
      height: 30px;
      width: 90px;
+}
+
+#deny-btn {
+  background-color: red;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+#deny-btn:hover {
+  background-color: white;
+  border: red 2px solid;
+  color: red;
+}
+#deny-btn:disabled {
+  background-color: white;
+  border: green 2px solid;
+  color: darkgray;
+}
+#accept-btn {
+  background-color: green;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+#accept-btn:hover {
+  background-color: white;
+  border: green 2px solid;
+  color: green;
+}
+
+#accept-btn:disabled {
+  background-color: white;
+  border: green 2px solid;
+  color: darkgray;
+}
+#play-again {
+  background-color: blue;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+#play-again:hover {
+  background-color: white;
+  border: blue 2px solid;
+  color: blue;
+}
+#queue-btn {
+  background-color: coral;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+}
+#queue-btn:hover {
+  background-color: white;
+  border: coral 2px solid;
+  color: coral;
+}
+
+#queue-btn:disabled {
+  background-color: white;
+  border: coral 2px solid;
+  color: darkgray;
 }

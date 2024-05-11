@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const wsPath = wsScheme + window.location.host + '/ws/matchmaking/';
     const socket = new WebSocket(wsPath);
 
+    acceptBtn.disabled = true;
+    denyBtn.disabled = true;
     socket.onopen = function(event) {
         console.log('WebSocket connected');
     };
@@ -42,10 +44,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         if (data.result) {
-            matchStatus.innerHTML += '<br>' + data.result;
-        };
+            // Set the color based on the result
+            let color = '';
+            if (data.result.includes('You won!')) {
+                color = 'green';
+            } else if (data.result.includes('You lost.')) {
+                color = 'red';
+            }
+
+            // Update matchStatus innerHTML with colored text
+            matchStatus.innerHTML += `<br><span style="color: ${color};">${data.result}</span>`;
+        }
         if (data.updated_rating) {
             matchStatus.innerHTML += '<br> Your new Elo rating is: ' + data.updated_rating;
+            matchStatus.innerHTML += '<br><button id="play-again" onclick="location.reload()">Play again?</button>';
         };
     };
 

@@ -16,14 +16,22 @@
      li {
       color: black; /* Set text color to black */
     }
+      /* Style for the outer container */
+        .outer-container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Center horizontally */
+            height: 100vh; /* Set height to 100% of viewport height */
+        }
 </style>
 
   <h2>Sign up</h2>
+<div class="outer-container">
   <form method="post">
   <div style="color:white;">
     {% csrf_token %}
     {{ form.as_p }}
       </div>
-    <button type="submit">Sign Up</button>
+    <button class="buttonaddsml" type="submit">Sign Up</button>
   </form>
+</div>
 {% endblock %}

@@ -32,6 +32,8 @@
     {% if user.is_authenticated %}
         <div class="home">
         <h2 class="top-menu">Hello {{ user.username }},</h2>
+        <h1>Your current Elo rating is: {{ user_eloinfo.elo }}</h1>
+        <h1>Your current rank is {{ user_eloinfo.rank_tier }}</h1>
         <h1>Click below to find a match:</h1>
             <div class="queueandsearch">
                 <p id="searching"></p>
@@ -45,7 +47,7 @@
         </div>
     {% else %}
         <div class="home">
-        <h2 class="top-menu">Please log in to continue to this website.</h2>
+        <h2 class="top-menu">Please log in to continue to this page.</h2>
         </div>
     {% endif %}
     </body>

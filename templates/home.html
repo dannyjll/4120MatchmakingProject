@@ -19,19 +19,19 @@
       font-weight: 900;
     }
 
+     h3 {
+      color: black; /* Set text color to black */
+      font-size: 20pt;
+      font-weight: 800;
+    }
+
 </style>
 
     <body>
-    {% if user.is_authenticated %}
         <div class="home">
         <h1>For Glory</h1>
         <h2 class="top-menu">Login or sign up to test your wits and battle against others in an online version of For Glory by Spielcraft Games. Fight your way up the ladder as you best your foes and increase your rank in our competitive matchmaking system. Don't get too comfortable however as with each loss your rank will fall. Do you have what it takes to climb?</h2>
         </div>
-    {% else %}
-        <div class="home">
-        <h2 class="top-menu">Please log in to continue to this website.</h2>
-        </div>
-    {% endif %}
     </body>
 {% endblock %}
 </html>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.functions import TruncDay
 from django.db.models import Count
 from django.shortcuts import render
+from .models import EloInfo
 import json
 
 
@@ -12,7 +13,14 @@ def home(request):
 
 
 def findmatch(request):
-    return render(request, 'findmatch.html', {'findmatch': findmatch})
+    print(request.user.id)
+    user_eloinfo = ''
+    if request.user.id:
+        user_eloinfo = EloInfo.objects.get(player=request.user)
+    else:
+        pass
+    return render(request, 'findmatch.html', {'findmatch': findmatch, 'user_eloinfo': user_eloinfo})
+
 
 def display_ranks(request):
     return render(request, 'displayranks.html', {'display_ranks': display_ranks})
