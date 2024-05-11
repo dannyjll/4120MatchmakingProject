@@ -76,4 +76,4 @@ class Result(models.Model):
     match_result = models.BooleanField()
 
     def __str__(self):
-        return str(self.user_id) + "\'s Match " + str(self.match_id) + "Result"
+        return str(self.match_id) + ' | ' + str(self.user_id) + "\'s " + "Result"
