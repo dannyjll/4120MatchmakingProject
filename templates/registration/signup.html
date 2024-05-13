@@ -1,37 +1,48 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Sign Up{% endblock %}
 {% block content %}
 
 <style>
-     h2 {
-      color: black; /* Set text color to black */
+    body, h2, p, li {
+        color: black;
     }
 
-     p {
-      color: black; /* Set text color to black */
+    form {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 300px;
+        margin: auto;
     }
 
-     li {
-      color: black; /* Set text color to black */
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
     }
-      /* Style for the outer container */
-        .outer-container {
-            display: flex; /* Use flexbox for layout */
-            justify-content: center; /* Center horizontally */
-            height: 100vh; /* Set height to 100% of viewport height */
-        }
+
+    .buttonaddsml {
+        width: 100%;
+        padding: 10px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
 </style>
 
-  <h2>Sign up</h2>
-<div class="outer-container">
-  <form method="post">
-  <div style="color:white;">
-    {% csrf_token %}
-    {{ form.as_p }}
-      </div>
-    <button class="buttonaddsml" type="submit">Sign Up</button>
-  </form>
-</div>
+<h2>Sign up</h2>
+    <form method="post">
+        <div>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <button class="buttonaddsml" type="submit">Sign Up</button>
+    </form>
 {% endblock %}
